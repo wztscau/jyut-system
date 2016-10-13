@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JyutClient.iml" filepath="$PROJECT_DIR$/JyutClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nohttp/nohttp.iml" filepath="$PROJECT_DIR$/nohttp/nohttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pagerslidingtabstrip-master/pagerslidingtabstrip-master.iml" filepath="$PROJECT_DIR$/pagerslidingtabstrip-master/pagerslidingtabstrip-master.iml" />
+    </modules>
+  </component>
+</project>

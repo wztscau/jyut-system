@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rel_functions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ImageButton
+        android:padding="@dimen/dp_5"
+        android:id="@+id/ibtn_back"
+        style="@style/Button.Press.actionBarSize"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:onClick="back"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_menu_back" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_toRightOf="@+id/ibtn_back"
+        android:gravity="center"
+        android:text="@string/function"
+        android:textSize="@dimen/sp_20" />
+
+    <ImageButton
+        android:id="@+id/ibtn_commit"
+        style="@style/Button.Press.actionBarSize"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_5"
+        android:onClick="commit"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_check_buttonless_on"
+        android:visibility="gone" />
+
+    <com.jyut.pagerslidingtabstrip_master.PagerSlidingTabStrip
+        android:id="@+id/tabSliding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@+id/toolbar"
+        app:pstsShouldExpand="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabSliding">
+
+
+        <!--<android.support.v4.view.PagerTabStrip-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/tab_strip"-->
+        <!--/>-->
+    </android.support.v4.view.ViewPager>
+
+
+</RelativeLayout>

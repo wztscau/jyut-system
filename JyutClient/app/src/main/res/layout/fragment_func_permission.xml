@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout style="@style/TextInput.Wrap.Padding">
+
+        <EditText
+            android:id="@+id/et_locale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_name" />
+    </android.support.design.widget.TextInputLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="@dimen/dp_50"
+    android:paddingLeft="@dimen/dp_50">
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/commit"
+        android:onClick="commit"
+        android:layout_alignParentRight="true"
+        android:id="@+id/btn_commit"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设为"
+        style="@android:style/TextAppearance"
+        android:layout_centerVertical="true"
+        android:id="@+id/tv_shewei"
+        />
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/tv_shewei"
+        android:layout_toLeftOf="@id/btn_commit"
+        android:entries="@array/perm_depts"/>
+</RelativeLayout>
+</LinearLayout>

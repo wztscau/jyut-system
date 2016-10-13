@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="me">我</string>
+	<string name="query">查询</string>
+	<string name="commit">确认</string>
+	<string name="add">添加</string>
+	<string name="all">全部</string>
+    <string name="function">功能</string>
+	<string name="clublist">社团表</string>
+	<string name="msg_list">消息列表</string>
+	<string name="worker_account">工作部账号</string>
+	<string name="login">登录</string>
+	<string name="name">姓名</string>
+	<string name="name_colon">姓名：</string>
+	<string name="locale">地区</string>
+	<string name="school">学校</string>
+	<string name="school_colon">学校：</string>
+	<string name="club">社团名称</string>
+	<string name="name_major">负责人名字</string>
+	<string name="tel">电话</string>
+	<string name="qq">QQ</string>
+	<string name="wechat">微信</string>
+	<string name="modifier">最后修改人</string>
+	<string name="xingming">姓名</string>
+	<string name="sex">性别</string>
+	<string name="wechat_nickName">微信昵称</string>
+	<string name="account">账号</string>
+	<string name="account_colon">账号：</string>
+	<string name="type">类型</string>
+	<string name="type_colon">类型：</string>
+	<string name="status">状态</string>
+	<string name="tomanager">设为管理员</string>
+
+	<string name="input_name">请输入你的姓名</string>
+	<string name="input_pwd">请输入你的密码</string>
+	<string name="input_phone">请输入你的11位手机号码</string>
+	<string name="input_school">请输入学校名字</string>
+	<string name="input_nickname">请输入你的微信ID（选填）</string>
+	<string name="input_account">请输入你的账户名</string>
+    <string name="input_locale">请输入中国省份或地区名</string>
+	<string name="input_club">请输入你的社团名称</string>
+	<string name="input_major">请输入负责人名字</string>
+	<string name="input_major_tel">请输入负责人电话号码</string>
+	<string name="input_major_qq">请输入负责人QQ（选填）</string>
+	<string name="input_major_wc">请输入负责人微信ID（选填）</string>
+
+    <string name="error_school_empty">学校名称不能为空</string>
+    <string name="error_locale_empty">地区不能为空</string>
+	<string name="error_locale">地区不合法</string>
+    <string name="error_club_empty">社团名称不能为空</string>
+    <string name="error_majorname_empty">负责人名字不能为空</string>
+	<string name="error_tel_empty">负责人电话不能为空</string>
+    <string name="error_tel">负责人电话号码有误</string>
+    <string name="error_qq">QQ号码太长了</string>
+    <string name="error_wechat">不能有中文或以数字开头</string>
+    <string name="error_name_empty">名字不能为空</string>
+	<string name="error_account_empty">账户名不能为空</string>
+	<string name="error_account">账户名必须与登录名相同</string>
+    <string name="error_nickname">无</string>
+	<string name="error_perimission">你的权限不够</string>
+
+	<string name="input_title">请输入标题</string>
+	<string name="input_content">请输入正文</string>
+	<string name="input_name_or_school">请输入姓名或学校</string>
+	<string name="input_name_or_school_club">请输入姓名或学校或社团名称</string>
+
+	<string name="function_undone">该功能尚未实现</string>
+	<string name="empty_content">找不到符合条件的记录</string>
+	<string name="empty_message">无任何消息记录</string>
+
+</resources>

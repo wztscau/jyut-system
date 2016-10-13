@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cv_item_msg"
+    style="@style/WrapContent.WidthMatchParent.RecyclerItem.Foreground"
+    android:layout_marginRight="20dp" 
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
+
+    <include layout="@layout/item_simple_inner" />
+
+</android.support.v7.widget.CardView>

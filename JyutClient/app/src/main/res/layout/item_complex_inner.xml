@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_msg_read"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_menu_delete" />
+
+    <TextView
+        android:id="@+id/tv_msg_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/iv_msg_read"
+        android:text="@string/account" />
+
+
+    <TextView
+        android:id="@+id/tv_msg_title"
+        style="@android:style/TextAppearance.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_toLeftOf="@id/iv_msg_read"
+        android:singleLine="true"
+        android:text="@string/account" />
+
+    <TextView
+        android:id="@+id/tv_msg_content"
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_toLeftOf="@id/tv_msg_date"
+        android:singleLine="true"
+        android:layout_below="@id/tv_msg_title"
+        android:text="@string/checking_list_of_club" />
+
+
+</RelativeLayout>

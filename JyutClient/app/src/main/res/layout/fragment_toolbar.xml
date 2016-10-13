@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical">
+    <ImageView
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:src="@drawable/ic_jyut"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_centerVertical="true"
+        android:id="@+id/iv_icon"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/sp_18"
+        android:layout_marginLeft="@dimen/dp_3"
+        android:layout_toLeftOf="@+id/ibtn_search"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="@string/app_name"
+        android:id="@+id/tv_title"
+        android:layout_toRightOf="@id/iv_icon"/>
+
+    <ImageButton
+        android:id="@+id/ibtn_add"
+        style="@style/Button.Press.dp50"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_menu_btn_add"
+        android:visibility="visible"
+        android:onClick="add"/>
+
+    <ImageButton
+        android:id="@+id/ibtn_commit"
+        style="@style/Button.Press.dp50"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_check_buttonless_on"
+        android:visibility="gone"
+        android:onClick="commit"
+        />
+
+    <ImageButton
+        android:id="@+id/ibtn_search"
+        style="@style/Button.Press.dp50"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/ibtn_add"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_menu_search"
+        android:visibility="visible"
+        android:onClick="search"
+        />
+
+</RelativeLayout>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/TextInput.Wrap.Padding"
+        >
+
+        <EditText
+            android:id="@+id/et_msg_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_title" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/TextInput.Wrap.Padding"
+        >
+
+        <EditText
+            android:id="@+id/et_msg_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_300"
+            android:hint="@string/input_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send_message"
+        android:onClick="sendMessage"
+        android:id="@+id/btn_send"/>
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:drawableTop="@drawable/ic_menu_find"
+    android:gravity="center"
+    android:text="@string/checking_list_of_club"
+    android:textSize="20sp"
+    android:textColor="#ffffff"
+    android:id="@+id/grid_item_check"
+    android:background="@drawable/selector_item_angle270"
+    android:clickable="true"
+    android:onClick="checkingClub"/>

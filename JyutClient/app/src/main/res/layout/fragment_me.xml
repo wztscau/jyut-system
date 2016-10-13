@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jyut.system.LoginActivity">
+
+    <include layout="@layout/fragment_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rel_me_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@android:color/holo_blue_light">
+
+        <ImageView
+            android:id="@+id/imv_medium_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/ic_launcher" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/imv_medium_head">
+
+            <LinearLayout
+                android:id="@+id/lil_text"
+                style="@style/WrapContent.WidthMatchParent"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextView.Wrap.Size20.White"
+                    android:text="@string/account_colon" />
+
+                <TextView
+                    android:id="@+id/tv_me_name"
+                    style="@style/TextView.Wrap.Size20.White" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/WrapContent.WidthMatchParent"
+                android:layout_below="@id/lil_text"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextView.Wrap.Size20.White"
+                    android:text="@string/type_colon" />
+
+                <TextView
+                    android:id="@+id/tv_me_type"
+                    style="@style/TextView.Wrap.Size20.White"
+                    android:layout_below="@id/tv_me_name" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include
+        layout="@layout/grid_me"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rel_me_head" />
+
+
+</RelativeLayout>

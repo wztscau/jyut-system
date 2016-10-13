@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="networks">
+        <item>网络一(测试)</item>
+        <item>网络二</item>
+        <item>网络三</item>
+        <item>离线登陆</item>
+    </string-array>
+    <string-array name="perm_depts">
+        <item>开发者</item>
+        <item>工作部专员</item>
+        <item>理事会会长</item>
+        <item>社团管理员</item>
+        <item>社团成员</item>
+    </string-array>
+    <string-array name="status_depts">
+        <item>可用</item>
+        <item>禁用</item>
+    </string-array>
+    <string-array name="sex_depts">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="provinces">
+        <item>      </item>
+        <item>(A)安徽</item>
+        <item>(A)澳门</item>
+        <item>(B)北京</item>
+        <item>(C)重庆</item>
+        <item>(F)福建</item>
+        <item>(G)甘肃</item>
+        <item>(G)广东</item>
+        <item>(G)广西</item>
+        <item>(G)贵州</item>
+        <item>(H)海南</item>
+        <item>(H)河北</item>
+        <item>(H)河南</item>
+        <item>(H)黑龙江</item>
+        <item>(H)湖北</item>
+        <item>(H)湖南</item>
+        <item>(J)吉林</item>
+        <item>(J)江苏</item>
+        <item>(J)江西</item>
+        <item>(L)辽宁</item>
+        <item>(N)内蒙古</item>
+        <item>(N)宁夏</item>
+        <item>(Q)青海</item>
+        <item>(S)山东</item>
+        <item>(S)山西</item>
+        <item>(S)陕西</item>
+        <item>(S)上海</item>
+        <item>(S)四川</item>
+        <item>(T)台湾</item>
+        <item>(T)天津</item>
+        <item>(X)西藏</item>
+        <item>(X)香港</item>
+        <item>(X)新疆</item>
+        <item>(Z)浙江</item>
+    </string-array>
+
+    <string-array name="functions">
+        <item>@string/send_message</item>
+        <item>@string/member_check</item>
+        <item>@string/send_announcement</item>
+        <item>@string/club_account_allocation</item>
+        <item>@string/system_permission</item>
+        <item>@string/times_of_added</item>
+        <item>@string/checking_list_of_club</item>
+        <item>@string/new_school</item>
+    </string-array>
+
+</resources>

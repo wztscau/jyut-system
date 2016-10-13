@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	主页
+
+	<form action="./login" method="get">
+		parameter: <input type="text" name="type" value='login' /><br>
+		用户名: <input type="text" name="DATA" /><br> 
+		密码: <input
+			type="text" name="password" /><br> 
+		权限: <input type="text"
+			name="permission" /><br> <input type="submit" value="提交" /><br>
+	</form>
+	<Button onclick='apk()'>下载客户端apk</Button>
+	<br>
+	<script type="text/javascript">
+		function tiaozhuan() {
+
+			// 以下方式直接跳转
+			window.location.href = './html/pics.html';
+			// 以下方式定时跳转
+			//setTimeout("javascript:location.href='./tomcat.png'", 2000);
+		}
+		function apk() {
+
+			// 以下方式直接跳转
+			window.location.href = './jyut.apk';
+			//window.location.href = 'D:\eclipse_project\Android\粤盟管理系统\bin\粤盟管理系统.apk';
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <style name="MatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchParent.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="MatchParent.Weight.Height">
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="MatchParent.Weight.Width">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="WrapContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WrapContent.WidthMatchParent">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="WrapContent.HeightMatchParent">
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WrapContent.AdjustViewBoundsFalse">
+        <item name="android:adjustViewBounds">false</item>
+    </style>
+
+
+    <style name="WrapContent.WidthMatchParent.RecyclerItem">
+        <item name="cardCornerRadius">@dimen/dp_5</item>
+        <item name="cardElevation">@dimen/dp_5</item>
+        <item name="contentPadding">@dimen/dp_15</item>
+    </style>
+
+    <style name="WrapContent.WidthMatchParent.RecyclerItem.Foreground">
+        <item name="android:foreground">@drawable/selector_transparent_half</item>
+    </style>
+
+
+
+
+</resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>Jyut</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.jyut.server.LoginServlet</servlet-class>
+		<init-param>
+			<param-name>driverName</param-name>
+			<param-value>com.mysql.jdbc.Driver</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DepartmentInsertServlet</servlet-name>
+		<servlet-class>com.jyut.server.DepartmentInsertServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DepartmentInsertServlet</servlet-name>
+		<url-pattern>/dinsert</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ClubtableInsertServlet</servlet-name>
+		<servlet-class>com.jyut.server.ClubtableInsertServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClubtableInsertServlet</servlet-name>
+		<url-pattern>/cinsert</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DepartmentUpdateServlet</servlet-name>
+		<servlet-class>com.jyut.server.DepartmentUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DepartmentUpdateServlet</servlet-name>
+		<url-pattern>/dupdate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ClubtableUpdateServlet</servlet-name>
+		<servlet-class>com.jyut.server.ClubtableUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClubtableUpdateServlet</servlet-name>
+		<url-pattern>/cupdate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DepartmentQueryServlet</servlet-name>
+		<servlet-class>com.jyut.server.DepartmentQueryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DepartmentQueryServlet</servlet-name>
+		<url-pattern>/dquery</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ClubtableQueryServlet</servlet-name>
+		<servlet-class>com.jyut.server.ClubtableQueryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClubtableQueryServlet</servlet-name>
+		<url-pattern>/cquery</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SchoolInsertServlet</servlet-name>
+		<servlet-class>com.jyut.server.SchoolInsertServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SchoolInsertServlet</servlet-name>
+		<url-pattern>/sinsert</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SchoolQueryServlet</servlet-name>
+		<servlet-class>com.jyut.server.SchoolQueryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SchoolQueryServlet</servlet-name>
+		<url-pattern>/squery</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SchoolUpdateServlet</servlet-name>
+		<servlet-class>com.jyut.server.SchoolUpdateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SchoolUpdateServlet</servlet-name>
+		<url-pattern>/supdate</url-pattern>
+	</servlet-mapping>
+	
+	
+</web-app>

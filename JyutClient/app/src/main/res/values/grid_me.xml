@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="member_check">社员审核</string>
+    <string name="system_permission">系统权限</string>
+    <string name="department_account">工作账号</string>
+    <string name="send_message">发送消息</string>
+    <string name="send_announcement">发社团公告</string>
+    <string name="new_school">新增学校</string>
+    <string name="club_account_allocation">社团账号分配</string>
+    <string name="times_of_added">增加次数</string>
+    <string name="checking_list_of_club">社团审核表</string>
+</resources>
