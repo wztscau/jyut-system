@@ -4,8 +4,11 @@
 package com.jyut.system.http;
 
 import java.io.IOException;
+import java.net.HttpCookie;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -13,6 +16,7 @@ import java.util.Set;
 import com.alibaba.fastjson.JSONObject;
 import com.jyut.system.C;
 import com.jyut.system.util.Encryption;
+import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.Response;
 
 import android.content.Context;
@@ -37,7 +41,7 @@ public class CookieManager {
     public void setFileName(String name) {
         this.spName = name;
         // 文件名加密用md5
-        if(C.ENCRYTED){
+        if (C.ENCRYTED) {
             spName = Encryption.encryptMD5(spName);
         }
     }
@@ -78,42 +82,51 @@ public class CookieManager {
         SharedPreferences sp = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
         @SuppressWarnings("unchecked")
         Map<String, String> srcMap = (Map<String, String>) sp.getAll();
-        Map<String,String> desMap = new HashMap<>();
+        Map<String, String> desMap = new HashMap<>();
         Set<Entry<String, String>> entrySet = srcMap.entrySet();
         for (Entry<String, String> entry : entrySet) {
             String key = entry.getKey();
             String value = entry.getValue();
-            if(C.ENCRYTED){
+            if (C.ENCRYTED) {
                 key = Encryption.decryptAES(key);
                 value = Encryption.decryptAES(value);
             }
-            desMap.put(key,value);
+            desMap.put(key, value);
         }
         return desMap;
     }
 
-    /**
-     * 没想到怎样实现
-     *
-     * @param url  url
-     * @param resp resp
-     * @throws IOException
-     */
-    public static void setCookie(String url, Response<JSONObject> resp) throws IOException {
-        URI uri = URI.create(url);
-//		java.net.CookieManager cookieManager = NoHttp.getDefaultCookieManager();
-//		cookieManager.put(uri, resp.getHeaders().toResponseHeaders());
-//		cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-//		List<HttpCookie> cookies = cookieManager.getCookieStore().getCookies();
-//		for (HttpCookie httpCookie : cookies) {
-//			String value = httpCookie.getValue();
-//			System.out.println("cookieValue=="+value);
-//		}
-//		cookieManager.getCookieStore().
-//		List<URI> urIs = cookieManager.getCookieStore().getURIs();
-//		for (URI uri2 : urIs) {
-//			System.out.println(uri2);
-//		}
+    public static List<HttpCookie> loadCookies() {
+        List<HttpCookie> cookies = NoHttp.getDefaultCookieManager().getCookieStore().getCookies();
+        List<HttpCookie> list = new ArrayList<>();
+        if (C.ENCRYTED) {
+            for (HttpCookie cookie : cookies) {
+                cookie.setValue(Encryption.decryptAES(cookie.getValue()));
+                list.add(cookie);
+            }
+            return list;
+        }
+        return cookies;
+    }
+
+    public static void saveCookies(List<HttpCookie> cookies, URI uri) {
+        NoHttp.getDefaultCookieManager().getCookieStore().getCookies().clear();
+        for (HttpCookie cookie : cookies) {
+            if(C.ENCRYTED){
+                cookie.setValue(Encryption.encryptAES(cookie.getValue()));
+            }
+            NoHttp.getDefaultCookieManager().getCookieStore().add(uri, cookie);
+        }
+    }
+
+    public static String getUserName() {
+        List<HttpCookie> cookies = loadCookies();
+        for (HttpCookie cookie : cookies) {
+            if (C.L.USERNAME.equals(cookie.getName())) {
+                return cookie.getValue();
+            }
+        }
+        return "";
     }
 
 }

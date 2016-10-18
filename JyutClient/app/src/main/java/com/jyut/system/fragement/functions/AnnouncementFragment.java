@@ -1,5 +1,6 @@
 package com.jyut.system.fragement.functions;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -71,7 +72,7 @@ public class AnnouncementFragment extends BaseFragment implements AdapterView.On
 
     public void loadSchools(String text) {
         HttpJsonRequest request = new HttpJsonRequest(LoginActivity.URL_SERVER + C.PATH_SERVER_SCHOOL_QUERY);
-        request.setOnResponseListener(new JsonResponse());
+        request.setOnResponseListener(new JsonResponse(getContext()));
         List<String> columnsLimited = new ArrayList<>();
         List<String> valuesLimited = new ArrayList<>();
         columnsLimited.add(C.L.LOCALE);
@@ -89,6 +90,10 @@ public class AnnouncementFragment extends BaseFragment implements AdapterView.On
 }
 
     class JsonResponse extends JsonArrayResponseAdapter {
+
+        public JsonResponse(Context context) {
+            super(context);
+        }
 
         @Override
         protected void displayResult(JSONArray jsonArray) {

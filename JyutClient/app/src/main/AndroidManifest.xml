@@ -19,10 +19,9 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".LoginActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme"
             android:icon="@drawable/ic_jyut"
-            >
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,23 +39,13 @@
         <activity
             android:name=".SearchActivity"
             android:theme="@style/Theme.Holo.NoActionBar.Translucent.Fullscreen" />
-        <activity
-            android:name=".FunctionsActivity"
-            >
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".FunctionsActivity" />
 
         <service
             android:name=".service.MessageService"
             android:enabled="true">
             <intent-filter>
-                <action android:name="com.jyut.system.service.MessageService"/>
+                <action android:name="com.jyut.system.service.MessageService" />
             </intent-filter>
         </service>
     </application>

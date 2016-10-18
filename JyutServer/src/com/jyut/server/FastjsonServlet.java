@@ -53,7 +53,6 @@ public abstract class FastjsonServlet extends MysqlServlet {
 			// 这里根据需求子类恰当地调用onSuccessResponse（）;
 //			onSuccessResponse(req, resp, writer);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			try {
 				onFailResponse(req, resp, writer,e);
@@ -103,7 +102,7 @@ public abstract class FastjsonServlet extends MysqlServlet {
 		Map<String, Object> map = new HashMap<>();
 		map.put(L.DATA, setFailData(request, response));
 		map.put(L.ERROR, "-1");// error是-1的时候代表服务端有问题
-		map.put(L.MESSAGE,setFailMessage());
+		map.put(L.MESSAGE,setFailMessage(e));
 		JSONObject jsonObject = (JSONObject) JSON.toJSON(map);
 		String jsonString = jsonObject.toJSONString();
 		if(C.ENCRYPTED){
@@ -115,7 +114,7 @@ public abstract class FastjsonServlet extends MysqlServlet {
 	
 	protected abstract String setSuccessData(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	protected abstract String setFailData(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	protected abstract String setFailMessage();
+	protected abstract String setFailMessage(Exception e);
 	protected abstract String setSuccessMessage();
 	
 	protected JSONObject getJsonObjectFromClient(HttpServletRequest req) {

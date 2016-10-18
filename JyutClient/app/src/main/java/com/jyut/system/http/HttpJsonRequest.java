@@ -11,6 +11,7 @@ import com.jyut.system.C;
 import com.jyut.system.util.Encryption;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.CacheMode;
 import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.RequestQueue;
@@ -33,7 +34,15 @@ public class HttpJsonRequest {
     private FastjsonRequest request;
 
     public HttpJsonRequest(String url) {
+        this(url,CacheMode.REQUEST_NETWORK_FAILED_READ_CACHE);
+    }
+
+    public HttpJsonRequest(String url,CacheMode mode) {
         this.url = url;
+        // 1.首先创建请求对象
+        request = new FastjsonRequest(url, RequestMethod.GET);
+        // 设置缓存模式
+        request.setCacheMode(mode);
     }
 
     /**
@@ -42,8 +51,6 @@ public class HttpJsonRequest {
      * @param obj 要发送的bean对象
      */
     public void sendRequest(Object obj) {
-        // 1.首先创建请求对象
-        request = new FastjsonRequest(url, RequestMethod.GET);
         // 2.把bean转换成json对象
         String jsonData = JSON.toJSONString(obj);
         // 3.加密
@@ -69,9 +76,7 @@ public class HttpJsonRequest {
      * @return 加密了的json
      */
     private String encryJson(String src) {
-        String data = src;
-        Log.i(TAG, data);
-        return Encryption.encryptAES(data);
+        return C.ENCRYTED?Encryption.encryptAES(src):src;
     }
 
     /**

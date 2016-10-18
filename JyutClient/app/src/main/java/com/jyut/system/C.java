@@ -11,7 +11,7 @@ public class C {
 
 	/* fixed value */
 	public static final String URL_SERVER_WAN = "http://10.91.63.94:9394/";
-	public static final String URL_SERVER_LAN = "http://192.168.1.106:8080/";
+	public static final String URL_SERVER_LAN = "http://192.168.1.2:8080/";
 	public static final String URL_SERVER_DOMAIN = "http://1581k8119c.51mypc.cn:9394/";
 	public static final String URL_SERVER_LOCAL = "http://127.0.0.1/";
 	public static final String URL_SERVER_LOCAL_EMULATOR = "http://10.0.0.2:8080/";
@@ -110,7 +110,7 @@ public class C {
 	public static final class S {
 		public static final String ACCESS_MYSQL_SUCCEED = "Access mysql database succeeded";
 		public static final String ACCESS_MYSQL_FAILED = "Access mysql database failed";
-		public static final String USERNAME_OR_PWD_WRONG = "Username or Password not correct";
+		public static final String USERNAME_OR_PWD_WRONG = "username or password incorrect";
 		public static final String ARE_YOU_COMMIT = "你是否确认你输入的数据准确无误？";
 		public static final String CANNOT_BE_NULL = " 不能为空";
 		public static final String TEL_FORMAT_ERROR = "电话号码格式错误";

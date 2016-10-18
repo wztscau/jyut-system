@@ -57,7 +57,7 @@ public class MeFragment extends Fragment {
         holder.tvMeName.setText(User.getInstance().getUname());
         String[] types = getResources().getStringArray(R.array.perm_depts);
         try{
-            int type = Integer.parseInt(User.getInstance().getPermission());
+            int type = Integer.parseInt(User.getInstance().getPermission())-1;
             Log.d(TAG, "onViewCreated: type--"+type);
             holder.tvMeType.setText(types[type]);
         }catch(Exception e){

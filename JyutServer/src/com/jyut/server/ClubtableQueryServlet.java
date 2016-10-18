@@ -3,6 +3,7 @@
  */
 package com.jyut.server;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +15,7 @@ import com.jyut.server.C.S;
  * @author wztscau
  * @project 粤盟管理系统服务器
  */
+@WebServlet("/cquery")
 public class ClubtableQueryServlet extends QueryServlet {
 
 
@@ -36,7 +38,7 @@ public class ClubtableQueryServlet extends QueryServlet {
 	 * @see com.jyut.server.FastjsonServlet#setFailMessage()
 	 */
 	@Override
-	protected String setFailMessage() {
+	protected String setFailMessage(Exception e) {
 		// TODO Auto-generated method stub
 		return S.QUERY_FAIL;
 	}

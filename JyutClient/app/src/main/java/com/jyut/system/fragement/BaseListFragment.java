@@ -1,6 +1,7 @@
 package com.jyut.system.fragement;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -71,8 +72,6 @@ public abstract class BaseListFragment extends Fragment implements OnItemClickLi
     FloatingActionButton fabFresh;
     @Bind(R.id.tv_title)
     TextView tvTitle;
-    @Bind(R.id.loader_progress)
-    ContentLoadingProgressBar loaderProgress;
     @Bind(R.id.tv_empty_content)
     TextView tvEmptyContent;
     @Bind(R.id.recycleview)
@@ -114,7 +113,7 @@ public abstract class BaseListFragment extends Fragment implements OnItemClickLi
         if (bundle == null) {
 //            loadData(setPageSize());
 //            dataLoader = new DataLoader(LoginActivity.URL_SERVER+setPath(),bundle);
-            dataLoader.setOnResponseListener(new BaseJsonResponse());
+            dataLoader.setOnResponseListener(new BaseJsonResponse(getContext()));
             dataLoader.setLoadListener(new DataLoader.LoadListener() {
                 @Override
                 public void onLoadStart(HttpJsonRequest request) {
@@ -313,10 +312,14 @@ public abstract class BaseListFragment extends Fragment implements OnItemClickLi
 
     protected class BaseJsonResponse extends JsonArrayResponseAdapter {
 
+        public BaseJsonResponse(Context context) {
+            super(context);
+        }
+
         @Override
         public void onStart(int what) {
             super.onStart(what);
-            showPrgress(true);
+//            showPrgress(true);
         }
 
         @Override
@@ -347,7 +350,7 @@ public abstract class BaseListFragment extends Fragment implements OnItemClickLi
                 rotation.cancel();
             }
             // 进度条也要停止
-            loaderProgress.setVisibility(View.GONE);
+//            loaderProgress.setVisibility(View.GONE);
             if (parcelables.isEmpty()) {
 //                tvEmptyContent.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "没有更多数据", Toast.LENGTH_SHORT).show();
@@ -356,7 +359,7 @@ public abstract class BaseListFragment extends Fragment implements OnItemClickLi
 
         @Override
         public void onFailFinal() {
-            loaderProgress.setVisibility(View.GONE);
+//            loaderProgress.setVisibility(View.GONE);
             adapterManager.onRefreshCompleted();
         }
 
@@ -375,7 +378,7 @@ public abstract class BaseListFragment extends Fragment implements OnItemClickLi
 
 
     private void showPrgress(boolean b) {
-        loaderProgress.setVisibility(b ? View.VISIBLE : View.GONE);
+//        loaderProgress.setVisibility(b ? View.VISIBLE : View.GONE);
         tvEmptyContent.setVisibility(b ? View.GONE : View.VISIBLE);
     }
 

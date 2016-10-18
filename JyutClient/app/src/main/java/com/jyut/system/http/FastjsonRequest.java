@@ -10,6 +10,7 @@ import com.jyut.system.C.L;
 import com.jyut.system.util.Encryption;
 import com.yolanda.nohttp.Headers;
 import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.CacheMode;
 import com.yolanda.nohttp.rest.RestRequest;
 import com.yolanda.nohttp.rest.StringRequest;
 import com.yolanda.nohttp.tools.MultiValueMap;
@@ -106,7 +107,7 @@ public class FastjsonRequest extends RestRequest<JSONObject> {
         } catch (Exception e) {
             // 可能返回的数据不是json，或者其他异常
             // 主要此处jsonObject不为空就可以
-            Map<String, Object> map = new HashMap<String, Object>();
+            Map<String, Object> map = new HashMap<>();
             map.put(L.ERROR, -1);
             map.put(L.URL, url);
             map.put(L.DATA, response);

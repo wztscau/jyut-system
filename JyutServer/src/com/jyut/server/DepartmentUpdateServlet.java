@@ -3,6 +3,7 @@
  */
 package com.jyut.server;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +14,7 @@ import com.jyut.server.C.S;
  * @author wztscau
  * @project 粤盟管理系统服务器
  */
+@WebServlet("/dupdate")
 public class DepartmentUpdateServlet extends UpdateServlet {
 
 	/**
@@ -43,7 +45,7 @@ public class DepartmentUpdateServlet extends UpdateServlet {
 	 * @see com.jyut.server.FastjsonServlet#setFailMessage()
 	 */
 	@Override
-	protected String setFailMessage() {
+	protected String setFailMessage(Exception e) {
 		// TODO Auto-generated method stub
 		return S.UPDATE_FAIL;
 	}

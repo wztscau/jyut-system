@@ -1,5 +1,6 @@
 package com.jyut.system.fragement.functions;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -70,7 +71,7 @@ public class SchoolFragment extends BaseFragment {
         }
         School school = new School(etLocale.getText().toString().trim(), etSchool.getText().toString().trim());
         HttpJsonRequest request = new HttpJsonRequest(LoginActivity.URL_SERVER + C.PATH_SERVER_SCHOOL_INSERT);
-        request.setOnResponseListener(new JsonResponse());
+        request.setOnResponseListener(new JsonResponse(getContext()));
         request.sendRequest(school);
 
     }
@@ -101,6 +102,10 @@ public class SchoolFragment extends BaseFragment {
     }
 
     class JsonResponse extends JsonResponseAdapter<JSONObject> {
+        public JsonResponse(Context context) {
+            super(context);
+        }
+
         @Override
         public void onSucceed(int what, Response<JSONObject> response) {
             super.onSucceed(what, response);

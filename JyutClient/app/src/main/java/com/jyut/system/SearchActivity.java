@@ -4,6 +4,7 @@
 package com.jyut.system;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -122,7 +123,7 @@ public class SearchActivity extends Activity {
         HttpJsonRequest request = new HttpJsonRequest(url);
         Log.d(TAG, "search: " + url);
         // 为请求添加回应监听
-        request.setOnResponseListener(new JsonResponse());
+        request.setOnResponseListener(new JsonResponse(this));
         if ("".equals(getSpinnerSelection(spnProvinces))) {
             map.remove(L.COLUMNS_LIMITED);
             map.remove(L.VALUES_LIMITED);
@@ -144,14 +145,14 @@ public class SearchActivity extends Activity {
 
     class JsonResponse extends JsonResponseAdapter<JSONObject> {
 
+        public JsonResponse(Context context){
+            super(context);
+        }
+
         @Override
         public void onSucceed(int what, Response<JSONObject> response) {
             super.onSucceed(what, response);
             JSONObject jsonObject = response.get();
-            if (jsonObject == null) {
-                onFailed(what, response);
-                return;
-            }
             Log.i(C.T.RESPONSE, jsonObject.toJSONString());
             String msg = jsonObject.getString(L.MESSAGE);
             if (S.QUERY_SUCCESS.equals(msg)) {

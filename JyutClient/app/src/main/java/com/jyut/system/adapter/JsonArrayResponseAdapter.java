@@ -1,5 +1,6 @@
 package com.jyut.system.adapter;
 
+import android.content.Context;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +28,8 @@ import java.util.ArrayList;
 public abstract class JsonArrayResponseAdapter extends JsonResponseAdapter<JSONObject>{
 
     private static String TAG;
-    public JsonArrayResponseAdapter(){
+    public JsonArrayResponseAdapter(Context context){
+        super(context);
         TAG = getClass().getName();
     }
 
@@ -36,11 +38,6 @@ public abstract class JsonArrayResponseAdapter extends JsonResponseAdapter<JSONO
         super.onSucceed(what, response);
         // 服务器返回的JsonObject对象
         JSONObject jsonObject = response.get();
-        if (jsonObject == null) {
-            // JsonObject有可能为null,
-            onFailed(what, response);
-            return;
-        }
         // 返回JsonObject里面的Message数据
         String msg = jsonObject.getString(C.L.MESSAGE);
         if (C.S.QUERY_SUCCESS.equals(msg)) {

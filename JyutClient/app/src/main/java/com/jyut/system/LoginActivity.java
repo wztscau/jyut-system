@@ -1,20 +1,8 @@
 package com.jyut.system;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
+import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,11 +11,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +26,11 @@ import com.jyut.system.bean.User;
 import com.jyut.system.http.CookieManager;
 import com.jyut.system.http.HttpJsonRequest;
 import com.jyut.system.util.Encryption;
+import com.yolanda.nohttp.rest.CacheMode;
 import com.yolanda.nohttp.rest.Response;
 
+import java.net.HttpCookie;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,8 +38,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * @author wztscau
@@ -68,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    @Bind(R.id.login_progress)
-    ProgressBar mProgressView;
+//    @Bind(R.id.login_progress)
+//    ProgressBar mProgressView;
     @Bind(R.id.et_account)
     AutoCompleteTextView mAccountView;
     @Bind(R.id.et_pwd)
@@ -189,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+//            showProgress(true);
 
             login(userName, pwd);
         }
@@ -201,9 +188,9 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void login(String userName, String pwd) {
 
-        HttpJsonRequest request = new HttpJsonRequest(URL_LOGIN);
+        HttpJsonRequest request = new HttpJsonRequest(URL_LOGIN, CacheMode.NONE_CACHE_REQUEST_NETWORK);
         // setListener要在发送请求之前，因为有可能请求回应的太快
-        request.setOnResponseListener(new JsonResponse());
+        request.setOnResponseListener(new JsonResponse(this));
         if (C.offLine(network)) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -212,9 +199,13 @@ public class LoginActivity extends AppCompatActivity {
         }
         // 这里要进行MD5加密
         // User里面自动会加密
-        request.sendRequest(
-                User.getInstance(userName, pwd)
-        );
+        try{
+            request.sendRequest(
+                    User.newInstance(userName, pwd)
+            );
+        }catch (User.AlreadyException e){
+            request.sendRequest(User.getInstance());
+        }
     }
 
 
@@ -222,33 +213,30 @@ public class LoginActivity extends AppCompatActivity {
      * 从本地文件中提取用户名和密码
      */
     private void loadCookies() {
-        CookieManager manager = new CookieManager(this);
-        manager.setFileName(Encryption.encryptMD5(C.SP_LOGIN));
-        Map<String, String> map = manager.loadFromLocal();
-        try {
-            if (map.isEmpty()) {
-                return;
+        List<HttpCookie> cookies = CookieManager.loadCookies();
+        Log.d(TAG, "loadCookies: "+cookies);
+        for(HttpCookie cookie : cookies){
+            String name = cookie.getName();
+            if(L.USERNAME.equals(name)){
+                mAccountView.setText(cookie.getValue());
             }
-            String userName = map.get(Encryption.encryptAES(L.USERNAME));
-            String pwd = map.get(Encryption.encryptAES(L.PASSWORD));
-            mAccountView.setText(userName);
-            mPasswordView.setText(pwd);
-        } catch (Exception e) {
-            e.printStackTrace();
+            if(L.PASSWORD.equals(name)){
+                mPasswordView.setText(cookie.getValue());
+            }
         }
     }
 
     class JsonResponse extends JsonResponseAdapter<JSONObject> {
 
 
+        public JsonResponse(Context context) {
+            super(context);
+        }
+
         @Override
         public void onSucceed(int what, Response<JSONObject> response) {
             super.onSucceed(what, response);
             JSONObject jsonObject = response.get();
-            if (jsonObject == null) {
-                onFailed(what, response);
-                return;
-            }
             String message = jsonObject.getString(L.MESSAGE);
             if (S.ACCESS_MYSQL_FAILED.equals(message)) {
                 onFailed(what, response);
@@ -263,11 +251,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i(TAG, "permission=" + permission);
                 // 1.保存用户名和密码，以备下次用户登录使用
                 try {
-                    saveCookies(userName, pwd);
+                    User.commit();
+                    saveCookies(response);
                     User.getInstance().setPermission(permission);
-                    Log.d(TAG, "onSucceed: permission--" + permission);
-//                    User user = new User();
-//                    user.setPermission(permission);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -275,13 +261,15 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            } else if(S.USERNAME_OR_PWD_WRONG.equals(message)){
+                toastShort(message);
             }
         }
 
         @Override
         public void onFinish(int what) {
             super.onFinish(what);
-            showProgress(false);
+//            showProgress(false);
         }
 
         @Override
@@ -301,23 +289,18 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
-
     /**
      * 保存用户名和密码
      *
-     * @param userName
-     * @param pwd
      * @throws Exception
      */
-    private void saveCookies(final String userName, final String pwd) throws Exception {
-        CookieManager manager = new CookieManager(this);
-        manager.setFileName(C.SP_LOGIN);
-        Map<String, String> map = new HashMap<>();
-        map.put(L.USERNAME, userName);
-        map.put(L.PASSWORD, pwd);
-        // map.put("userName", userName);
-        // map.put("password", pwd);
-        manager.saveToLocal(map);
+    private void saveCookies(Response<JSONObject> response) throws Exception {
+        String url = response.request().url();
+        URI uri = new URI(url);
+        List<HttpCookie> cookies = new ArrayList<>();
+        cookies.add(new HttpCookie(L.USERNAME,userName));
+        cookies.add(new HttpCookie(L.PASSWORD,pwd));
+        CookieManager.saveCookies(cookies,uri);
     }
 
     private boolean isAccountValid(String account) {
@@ -331,38 +314,38 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+//    private void showProgress(final boolean show) {
+//        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+//        // for very easy animations. If available, use these APIs to fade-in
+//        // the progress spinner.
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+//            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+//
+//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+//                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//                }
+//            });
+//
+//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//            mProgressView.animate().setDuration(shortAnimTime).alpha(
+//                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//                }
+//            });
+//        } else {
+//            // The ViewPropertyAnimator APIs are not available, so simply show
+//            // and hide the relevant UI components.
+//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//        }
+//    }
 
 }
 

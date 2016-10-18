@@ -3,8 +3,11 @@
  */
 package com.jyut.system.fragement;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,9 +42,11 @@ public class ClubEditorFragment extends EditorFragment {
 
     private static final String TAG = "ClubEditorFragment";
 
+
     private ClubMember member;
     private Map<String, EditText> nameOfEditText = new HashMap<>();
     ViewHolder holder;
+    private Bitmap head;
 
     public ClubEditorFragment() {
         Bundle bundle = getArguments();
@@ -121,6 +126,29 @@ public class ClubEditorFragment extends EditorFragment {
 
     }
 
+    @OnClick(R.id.imv_medium_head)
+    public void openImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(intent, C.WHAT_SUCCESS);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "onActivityResult: ");
+        if(data==null){
+            Log.d(TAG, "onActivityResult: intent is null");
+            return;
+        }
+        Bundle extras = data.getExtras();
+        if (extras != null) {
+            Log.d(TAG, "onActivityResult: bundle exists");
+//            head = (Bitmap) extras.get("data");
+            head = extras.getParcelable("data");
+            holder.imvMediumHead.setImageBitmap(head);
+        }
+    }
+
     private boolean attemptCommit() {
         Resources resources = getResources();
         if (TextUtils.isEmpty(getText(holder.etLocale))) {
@@ -187,8 +215,7 @@ public class ClubEditorFragment extends EditorFragment {
 
     @Override
     protected Class<?> setDispatchClass() {
-        Class<?> clz = MainActivity.class;
-        return clz;
+        return MainActivity.class;
     }
 
     @Override
@@ -197,8 +224,10 @@ public class ClubEditorFragment extends EditorFragment {
         ButterKnife.unbind(this);
     }
 
-
     static class ViewHolder {
+
+        @Bind(R.id.imv_medium_head)
+        ImageView imvMediumHead;
         @Bind(R.id.iv_icon)
         ImageView ivIcon;
         @Bind(R.id.ibtn_add)

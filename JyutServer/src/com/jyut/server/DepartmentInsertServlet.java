@@ -3,24 +3,18 @@
  */
 package com.jyut.server;
 
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSONObject;
-import com.jyut.server.C.L;
 import com.jyut.server.C.S;
-import com.jyut.server.util.Encryption;
 
 /**
  * @date Sep 27, 2016
  * @author wztscau
  * @project 粤盟管理系统服务器
  */
+@WebServlet("/dinsert")
 public class DepartmentInsertServlet extends InsertServlet {
 
 	/**
@@ -68,7 +62,7 @@ public class DepartmentInsertServlet extends InsertServlet {
 	 * @see com.jyut.server.FastjsonServlet#setFailMessage()
 	 */
 	@Override
-	protected String setFailMessage() {
+	protected String setFailMessage(Exception e) {
 		// TODO Auto-generated method stub
 		return S.INSERT_FAIL;
 	}

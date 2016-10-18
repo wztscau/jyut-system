@@ -11,7 +11,8 @@
         android:src="@drawable/ic_jyut"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_centerVertical="true"
-        android:id="@+id/iv_icon"/>
+        android:id="@+id/iv_icon"
+        />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -4,6 +4,7 @@
 package com.jyut.system.fragement;
 
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -117,12 +118,16 @@ public abstract class EditorFragment extends Fragment {
     private void commit(Member member) {
         String url = LoginActivity.URL_SERVER + setInsertPath();
         HttpJsonRequest request = new HttpJsonRequest(url);
-        request.setOnResponseListener(new JsonResponse());
+        request.setOnResponseListener(new JsonResponse(getContext()));
         request.sendRequest(member);
 
     }
 
     class JsonResponse extends JsonResponseAdapter<JSONObject> {
+        public JsonResponse(Context context) {
+            super(context);
+        }
+
         @Override
         public void onStart(int what) {
             Log.i(getClass().getName(), "request start");

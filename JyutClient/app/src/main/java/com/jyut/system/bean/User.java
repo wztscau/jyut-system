@@ -20,6 +20,7 @@ public class User {
 	public static User mUser;
 
 	private transient String uname;
+	private transient static boolean mCommit;
 
 	public String getUname() {
 		return uname;
@@ -33,6 +34,14 @@ public class User {
 		if(mUser==null){
 			mUser = new User(userName,password);
 		}
+		return mUser;
+	}
+
+	public static User newInstance(String userName,String password){
+		if(mCommit){
+			throw new AlreadyException("The user has been create");
+		}
+		mUser =new User(userName,password);
 		return mUser;
 	}
 
@@ -85,4 +94,14 @@ public class User {
 		this.permission = permission;
 	}
 
+	public static void commit(){
+		mCommit = true;
+	}
+
+	public static class AlreadyException extends RuntimeException{
+
+		public AlreadyException(String detailMessage) {
+			super(detailMessage);
+		}
+	}
 }
